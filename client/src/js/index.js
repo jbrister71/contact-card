@@ -8,10 +8,14 @@ import "../css/index.css";
 import Logo from '../images/logo.png';
 import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
-import { initdb } from "./database";
+import { getDb, initdb, postDb } from "./database";
 
 window.addEventListener('load', function() {
     initdb();
+
+    getDb();
+    postDb('Me', "me@me.me", 8186601234, "Bear");
+    getDb();
     document.getElementById('logo').src = Logo;
     document.getElementById('bearThumbnail').src = Bear;
     document.getElementById('dogThumbnail').src = Dog;

@@ -1,4 +1,4 @@
-import "./form";
+import { toggleForm, clearForm } from "./form";
 
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,7 +8,7 @@ import { fetchCards } from "./card";
 import Logo from '../images/logo.png';
 import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
-import { getDb, initdb, postDb } from "./database";
+import { getDb, initdb, postDb, deleteDb, editDb } from "./database";
 
 window.addEventListener('load', function() {
     initdb();
@@ -42,6 +42,7 @@ if (submitBtnToUpdate == false) {
 } else {
 
   fetchCards();
+  editDb(profileId, name, email, phone, profile);
     // Toggles the submit button back to POST functionality
   submitBtnToUpdate = false;
 }
@@ -53,3 +54,24 @@ toggleForm();
 // Reload the DOM
 fetchCards();
 });
+
+window.deleteCard = (e) => {
+    let id = parseInt(e.id);
+    deleteDb(id);
+    fetchCards();
+};
+
+window.editCard = (e) => {
+    profileId = parseInt(e.dataset.id);
+
+    let name = e.dataset.name;
+    let phone = e.dataset.phone;
+    let email = e.dataset.email;
+
+    document.getElementById("name").value = name;
+    document.getElementById("email").vale = email;
+    document.getElementById("phone").value = phone;
+
+    form.style.display = "block";
+    submitBtnToUpdate = true;
+}

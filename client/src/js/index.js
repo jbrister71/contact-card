@@ -1,6 +1,5 @@
 import { toggleForm, clearForm } from "./form";
 
-import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/index.css";
 import { fetchCards } from "./card";
@@ -74,4 +73,10 @@ window.editCard = (e) => {
 
     form.style.display = "block";
     submitBtnToUpdate = true;
-}
+};
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js');
+    });
+};
